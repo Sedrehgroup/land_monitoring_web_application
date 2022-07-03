@@ -1,0 +1,60 @@
+from download_images.get_images import unzip_images, select_background
+import os
+path = os.getcwd()
+unzip_images(path)
+select_background(path)
+
+from download_images.cloud_mask import cloud_mask
+import os
+path = os.getcwd()
+cloud_mask(path)
+
+from download_images.apply_model import median_images, AI_image_preparation, run_model
+import os
+path=os.getcwd()
+median_images(path)
+AI_image_preparation(path)
+run_model(path)
+
+
+from download_images.mosaic_images import mosaic_labels, mosaic_alborz_tiles, crop_images, stack_tci_files
+import os
+path = os.getcwd()
+mosaic_labels(path)
+stack_tci_files(path)
+mosaic_alborz_tiles(path)
+crop_images(path, time=time)
+
+
+from image_analysis.label_analysis import update_database
+import os
+path = os.getcwd()
+date = '14001'
+update_database(path, date)
+
+
+from image_analysis.change_detection import change
+import os
+path = os.getcwd()
+region = 10
+before_name = 'label_14012.tiff'
+after_name = 'label_14012.tiff'
+change(region, before_name, after_name, path)
+
+from image_analysis.change_detection import Change
+import os
+path = os.getcwd()
+geom_id = 1
+before_name = 'label_14012.tiff'
+after_name = 'label_14012.tiff'
+p1 = Change(geom_id, before_name, after_name, path)
+p1.get_datasets()
+# _, _ = p1.change_analysis()
+class_change = 'not_changed'
+p1.get_polygons(class_change)
+
+from download_images.manual_run import sentinel_download
+start_date_string = '14000201'
+end_date_string = '14000401'
+sentinel_download(start_date_string, end_date_string)
+

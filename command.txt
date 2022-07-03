@@ -1,0 +1,18 @@
+sudo docker exec -i postgres psql -U postgres asena < asena.sql
+
+sudo docker system prune --volumes
+
+
+---------------------------------------------------------------------------------
+# landmonitoring 
+sudo docker exec -i -u postgres postgis psql -U postgres LandMonitoring < celery_beat.sql
+
+---------------------------------------------------------------------------------
+find / -name pg_hba.conf
+/etc/postgresql/14/main/pg_hba.conf
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+local   all             all                                     trust
+
+
+

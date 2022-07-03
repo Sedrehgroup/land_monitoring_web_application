@@ -1,0 +1,6 @@
+AI_django/images/*
+AI_django/*.zip
+AI_django/.idea
+.idea
+AI_django/torch_semi_seg_model/*.pth
+

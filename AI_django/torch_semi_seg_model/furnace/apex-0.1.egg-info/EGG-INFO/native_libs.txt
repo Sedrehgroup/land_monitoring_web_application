@@ -1,0 +1,5 @@
+amp_C.cpython-36m-x86_64-linux-gnu.so
+apex_C.cpython-36m-x86_64-linux-gnu.so
+fused_adam_cuda.cpython-36m-x86_64-linux-gnu.so
+fused_layer_norm_cuda.cpython-36m-x86_64-linux-gnu.so
+syncbn.cpython-36m-x86_64-linux-gnu.so
