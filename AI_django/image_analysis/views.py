@@ -8,6 +8,7 @@ from django.core import serializers
 import json
 import shapely.wkt
 import geojson
+from download_images.manual_run import sentinel_download
 
 
 model_index = {
@@ -141,3 +142,11 @@ class ClassIndiv(APIView):
             data.append(index[0])
 
         return Response(status=status.HTTP_200_OK, data=data)
+
+
+class ManualRun(APIView):
+    def post(self, request):
+        start_date_string = request.data.get('start_date_string')
+        end_date_string = request.data.get('end_date_string')
+
+        sentinel_download(start_date_string, end_date_string)

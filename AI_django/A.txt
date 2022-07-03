@@ -29,7 +29,7 @@ crop_images(path, time=time)
 from image_analysis.label_analysis import update_database
 import os
 path = os.getcwd()
-date = '14001'
+date = '140001'
 update_database(path, date)
 
 
@@ -55,6 +55,6 @@ p1.get_polygons(class_change)
 
 from download_images.manual_run import sentinel_download
 start_date_string = '14000201'
-end_date_string = '14000401'
+end_date_string = '14010201'
 sentinel_download(start_date_string, end_date_string)
 
