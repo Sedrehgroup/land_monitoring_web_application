@@ -83,9 +83,6 @@ class ClassStaticsGeom(APIView):
         return Response(status=status.HTTP_200_OK, data=data)
 
 
-# (region_id , date , class): (area , plygon)
-
-
 class ClassStatics(APIView):
     def post(self , request):
         data = []
@@ -139,7 +136,13 @@ class ClassIndiv(APIView):
         list_data = g2.geometry["coordinates"]
         data = []
         for index in list_data:
-            data.append(index[0])
+            sub_data = []
+            for sub in index[0]:
+                sub_data.append([sub[1], sub[0]])
+            data.append(sub_data)
+
+        # for index in list_data:
+        #     data.append(index[0])
 
         return Response(status=status.HTTP_200_OK, data=data)
 

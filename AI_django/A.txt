@@ -29,7 +29,7 @@ crop_images(path, time=time)
 from image_analysis.label_analysis import update_database
 import os
 path = os.getcwd()
-date = '140001'
+date = '14012'
 update_database(path, date)
 
 

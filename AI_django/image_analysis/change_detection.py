@@ -2,9 +2,6 @@ import os
 import rasterio
 import numpy as np
 from rasterio.features import shapes
-from shapely.geometry import Polygon
-from shapely.ops import unary_union
-from django.contrib.gis.geos import GEOSGeometry
 
 
 class Change:
@@ -59,9 +56,10 @@ class Change:
 
         for i, (s, v) in enumerate(shapes(mask, mask=None, transform=self.before_dataset.transform)):
             if v == 1:
-                # geom.append(Polygon(s['coordinates'][0]))
-                geom.append(s['coordinates'][0])
-        # geom = unary_union(geom)
+                sub_data = []
+                for sub in s['coordinates'][0]:
+                    sub_data.append([sub[1], sub[0]])
+                geom.append(sub_data)
         return geom
 
 

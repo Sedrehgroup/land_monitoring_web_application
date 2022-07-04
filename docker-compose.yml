@@ -72,8 +72,8 @@ services:
       - GEOSERVER_PORT=8080
       - GEOSERVER_HOST_IP=localhost
     volumes:
-      - /home/ubuntu/ai_images:/ai_django/images
-#      - /home/alireza/Desktop/land_monitoring/codes/AI_django:/ai_django
+#      - /home/ubuntu/ai_images:/ai_django/images
+      - /home/alireza/Desktop/land_monitoring/codes/AI_django:/ai_django
     expose:
       - 8000
     networks:
