@@ -13,25 +13,19 @@ class UserGeometry(APIView):
     """return geometries of each user"""
     permission_classes = [AllowAny]
 
-    def get(self, request):
+    def post(self, request):
+        username = request.data.get('username')
         try:
-            # take jwt token from request
-            token = request.META.get('HTTP_AUTHORIZATION', " ").split(' ')[1]
-            # take user from jwt token
-            payload = jwt.decode(jwt=token, key=settings.SECRET_KEY, algorithms=['HS256'])
-            user = get_user_model().objects.get(id=payload['user_id'])
+            user = User.objects.get(username=username)
+            geometry = Alborz.objects.filter(user=user)
         except:
-            return  Response(status= status.HTTP_401_UNAUTHORIZED)
-
+            return Response(status=status.HTTP_404_NOT_FOUND)
         data = []
-        # user = User.objects.get(username='alid1')
-        geometry = Alborz.objects.filter(user=user)
-        print(geometry)
         for item in geometry:
             geom = {"id": item.id, "name": item.per_nam, "geometry": json.loads(item.geom.geojson)}
             data.append(geom)
 
-        return Response(data=data)
+        return Response(data=data, status=status.HTTP_200_OK)
 
 
 class SetGeometry(APIView):

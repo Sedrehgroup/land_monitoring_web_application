@@ -67,7 +67,7 @@ def record(date, filename, geom_id):
     result = count_pixels(filename=filename)[1:]
 
     geomid = Alborz.objects.get(id=geom_id)
-    get_geom = Raster2Vec(filename=filename)
+    get_geom = Rastecoordinatesr2Vec(filename=filename)
     get_geom()
     # TODO : error for save a polygon occurs. we must replace try with another solution
     for item in result:
