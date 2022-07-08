@@ -86,17 +86,6 @@ POSTGRESQL = {
 DATABASES = {
     'default': POSTGRESQL
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'zamin2',
-#         'USER': 'postgres',
-#         'PASSWORD': '46802196',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

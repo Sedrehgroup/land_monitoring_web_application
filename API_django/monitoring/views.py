@@ -47,7 +47,7 @@ class Monitor(APIView):
         # get after time and URL
         after = datetime.now()
         after_jalali = jdatetime.date.fromgregorian(date=after)
-        after_URL = f'zamin2:{geom_name}_{ after_jalali.strftime("%Y%m")}'
+        after_URL = f'zamin2:{geom_name}_TCI_{ after_jalali.strftime("%Y%m")}'
 
         # get before month time and URL
         before_month_URL = return_before(geom_name, after, 1)

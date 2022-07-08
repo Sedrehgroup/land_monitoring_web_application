@@ -17,9 +17,15 @@ local   all             all                                     trust
 
 
 مشکلات سامانه که باید حل شود
-۱- جابهجایی API ها به سامانه django_api
+# ۱- جابهجایی API ها به سامانه django_api
 ۲-حل مشکل try execpt برای ذخیره سازی پلیگون ها در سامانه
 ۳- مشکل امنیت سامانه و cors headers and alloew hosts
 ۴ - مشکل تقسیم بر صفر در هنگام محاسبه NDVI
 ۵ - انجام بخش سوم سامانه نظارت زمین
-۶- حل کردن مشکل جابهجایی lat و lon
+
+
+# ۶- حل کردن مشکل جابهجایی lat و lon
+
+from glob import glob
+
+files  = glob(wddlkcnw;/*.tiff)

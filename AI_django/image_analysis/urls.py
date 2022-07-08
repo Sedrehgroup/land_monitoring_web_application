@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import ChangeDetectionStatics, ChangeDetectionPolygon, ClassStaticsGeom, ClassStatics, ClassIndiv, ManualRun
 
-
+ManualRun
 urlpatterns = [
     path('statics', ChangeDetectionStatics.as_view()),
     path('polygon', ChangeDetectionPolygon.as_view()),
