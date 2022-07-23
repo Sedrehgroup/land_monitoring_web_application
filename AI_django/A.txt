@@ -31,6 +31,8 @@ import os
 path = os.getcwd()
 date = '14012'
 update_database(path, date)
+dates = ['14001' , '14002' , '14003' , '14004' , '14005' , '14006' , '14007' , '14008' , '14009' , '140010' , '14011' , '14012' , '14013']
+
 
 
 from image_analysis.change_detection import change
@@ -58,3 +60,26 @@ start_date_string = '14000201'
 end_date_string = '14010201'
 sentinel_download(start_date_string, end_date_string)
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+from download_images.get_images import unzip_images, select_background
+from download_images.cloud_mask import cloud_mask
+from download_images.apply_model import median_images, AI_image_preparation, run_model
+from download_images.mosaic_images import mosaic_labels, mosaic_alborz_tiles, crop_images, stack_tci_files
+from image_analysis.label_analysis import update_database
+import os
+
+path = os.getcwd()
+
+unzip_images(path)
+select_background(path)
+cloud_mask(path)
+median_images(path)
+AI_image_preparation(path)
+run_model(path)
+mosaic_labels(path)
+stack_tci_files(path)
+mosaic_alborz_tiles(path)
+date = '14012'
+crop_images(path, time=date)
+update_database(path, date)

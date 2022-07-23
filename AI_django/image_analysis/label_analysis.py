@@ -8,6 +8,7 @@ from shapely.ops import unary_union
 from .models import AlborzUrban, AlborzBare, AlborzRoad, AlborzTree, AlborzWater, AlborzGrass, AlborzCropLand , Alborz
 import datetime
 from django.contrib.gis.geos import GEOSGeometry
+import geopandas
 
 
 classify_index = {
@@ -38,9 +39,12 @@ class Raster2Vec:
         mask = None
         for i, (s, v) in enumerate(shapes(self.raster, mask=mask, transform=self.dataset.transform)):
             if v == float(value):
-                geom.append(Polygon(s['coordinates'][0]))
-        geom = unary_union(geom)
-        return geom
+                print(s)
+                geom.append((Polygon(s['coordinates'][0])))
+        # geom = unary_union(geom)
+        geom = geopandas.GeoSeries(geom)
+        geom = geom.unary_union
+        return str(geom)
 
 
 def count_pixels(filename):
@@ -76,11 +80,12 @@ def record(date, filename, geom_id):
             count = item[1]
             geom = get_geom.run(index)
             model = classify_index[str(index)]()
-            model.date = model_date
-            model.area = count
-            model.region = geomid
-            model.geom = GEOSGeometry(str(geom))
-            model.save()
+            if not model.objects.filter(region = geom_id , date = model_date).exists():
+                model.date = model_date
+                model.area = count
+                model.region = geomid
+                model.geom = GEOSGeometry(str(geom))
+                model.save()
         except:
             pass
 

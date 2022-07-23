@@ -73,7 +73,8 @@ services:
       - GEOSERVER_HOST_IP=localhost
     volumes:
 #      - /home/ubuntu/ai_images:/ai_django/images
-      - /home/alireza/Desktop/land_monitoring/codes/AI_django:/ai_django
+      - /home/sedreh-darvish/Desktop/AliD/ai_images:/ai_django/images
+      - ./AI_django:/ai_django
     expose:
       - 8000
     networks:
@@ -131,7 +132,7 @@ services:
       context: ./API_django
     command: sh -c "python manage.py migrate
               && python manage.py shell -c 'from authe import load'
-              && gunicorn config.wsgi --bind 0.0.0.0:8001"
+              && gunicorn --reload config.wsgi --bind 0.0.0.0:8001"
     container_name: api_django
     depends_on:
       - postgis
@@ -147,6 +148,10 @@ services:
       - DB_PORT=5432
       - DB_SCHEMA=public
       - ALLOW_ORIGIN=http://localhost:3000
+    volumes:
+      - ./API_django:/api_django
+      - /home/sedreh-darvish/Desktop/AliD/ai_images:/api_django/images
+#      - /home/ubuntu/ai_images:/api_django/images
     networks:
       - main
     restart: on-failure

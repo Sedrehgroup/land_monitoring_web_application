@@ -24,8 +24,8 @@ model_index = {
 
 class ChangeDetectionStatics(APIView):
     def post(self, request):
-        geom_id = request.data["geom_id"]
-        before_name = request.data["before_name"]
+        geom_id = request.data.get('geom_id')
+        before_name = request.data.get('before_name')
         after_name = request.data["after_name"]
         path = os.getcwd()
 

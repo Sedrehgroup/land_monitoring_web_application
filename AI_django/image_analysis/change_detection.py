@@ -32,7 +32,7 @@ class Change:
         before_raster_flatten = before_raster.flatten()
         after_raster_flatten = after_raster.flatten()
         # because we have not second picture
-        np.random.shuffle(after_raster_flatten)
+        # np.random.shuffle(after_raster_flatten)
         self.shape = before_raster.shape
 
         change_array = []

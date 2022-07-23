@@ -60,3 +60,4 @@ class Alborz(models.Model):
     area = models.FloatField(null=True)
     hectares = models.FloatField(null=True)
     geom = models.MultiPolygonField(srid=32639)
+

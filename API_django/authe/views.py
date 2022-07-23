@@ -11,7 +11,7 @@ from django.core import serializers
 
 class UserGeometry(APIView):
     """return geometries of each user"""
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         username = request.data.get('username')
@@ -30,27 +30,40 @@ class UserGeometry(APIView):
 
 class SetGeometry(APIView):
     """set geometry for each user by admin"""
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
 
     def post(self, request):
         username = request.data.get('username')
         geom_id = request.data.get('geom')
-
         try:
             user = User.objects.get(username=username)
-            geom = Alborz.objects.get(id=geom_id)
+            for item in geom_id:
+                geom = Alborz.objects.get(id=item)
+                user.geom.add(geom)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-        user.geom.add(geom)
         user.save()
-
         return Response(status=status.HTTP_200_OK)
 
+class DelSetGeometry(APIView):
+    """delete set geometry for each user by admin"""
+    permission_classes = [IsAdminUser]
+    def post(self , request):
+        username = request.data.get('username')
+        geom_id = request.data.get('geom')
+        try:
+            user = User.objects.get(username=username)
+            for item in geom_id:
+                geom = Alborz.objects.get(id=item)
+                user.geom.remove(geom)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        user.save()
+        return Response(status=status.HTTP_200_OK)
 
 class SetActive(APIView):
     """activate users by admin"""
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
 
     def post(self, request):
         username = request.data.get('username')
@@ -58,12 +71,12 @@ class SetActive(APIView):
         user.is_verified = True
         user.save()
 
-        return Response({"message": "done"})
+        return Response(status=status.HTTP_200_OK)
 
 
 class Geometry(APIView):
     """return all geometries by admin"""
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
 
     def get(self, request):
         data = []
@@ -77,9 +90,19 @@ class Geometry(APIView):
 
 class Users(APIView):
     """return all users by admin"""
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
 
     def get(self, request):
         users = User.objects.all()
         data = serializers.serialize('json', users)
-        return Response(data=data)
+        return Response(data=data , status=status.HTTP_200_OK)
+
+
+class DeleteUSer(APIView):
+    permission_classes =  [IsAdminUser]
+
+    def post(self , request):
+        username = request.data.get('username')
+        user_id = User.objects.get(username = username)
+        user_id.delete()
+        return Response(status=status.HTTP_200_OK)

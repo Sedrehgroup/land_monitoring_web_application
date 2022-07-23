@@ -27,7 +27,7 @@ def SendToAuth(token):
 
 
 class Monitor(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:

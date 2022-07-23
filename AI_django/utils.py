@@ -1,4 +1,4 @@
-from geoserver.geoserver import create_layer_with_store , get_or_create_workspace
+from geoserver.geoserver import create_layer_with_store , get_or_create_workspace , exist_layer
 from django.conf import settings
 import os
 import requests
@@ -20,6 +20,9 @@ class LayerAdd():
         for item in self.region_id:
             self.url = os.path.join(self.path, self.province, item, self.filename)
             self.layer = item+'_'+self.layer_name
+            if exist_layer(self.layer):
+                print('layer exists! ignoring.. ')
+                break
             create_layer_with_store(data_type='tiff', url=self.url, layer_name=self.layer, store_name=self.layer )
             self.input_transparent()
         return self.layer
